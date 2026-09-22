@@ -1,0 +1,3 @@
+window.lang = localStorage.getItem('avera-lang') || 'en';
+window.t = k => AVERA_I18N[window.lang][k] || k;
+window.applyI18n = function(){ document.documentElement.lang=window.lang; document.querySelectorAll('[data-i18n]').forEach(el=>{el.innerHTML=t(el.dataset.i18n)}); document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>el.placeholder=t(el.dataset.i18nPlaceholder)); document.querySelectorAll('[data-lang]').forEach(el=>el.classList.toggle('active',el.dataset.lang===window.lang)); document.title='AVERA — '+(document.body.dataset.page==='home'?'Restaurant':t('nav'+(document.body.dataset.page||'Menu').replace(/^./,x=>x.toUpperCase()))); document.dispatchEvent(new Event('languagechange'));};
